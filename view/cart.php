@@ -15,7 +15,7 @@
 
     <?php
         include_once "header.php";
-        include_once "../controller/shopImageGallery.php";
+        include_once "../controller/[INSERT CONTROLLER]";
     ?>
     
     <!-- Optional JavaScript; choose one of the two! -->
