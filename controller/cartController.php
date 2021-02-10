@@ -8,7 +8,7 @@ $grandTotal=0;
 
 if(count($_COOKIE) <= 1) //Empty cookie still contains a session id
 {
-  echo '<p>There is nothing in the cart.</p>';
+  echo '<br><p class="text-center">There is nothing in the cart.</p>';
   return;
 }
 
