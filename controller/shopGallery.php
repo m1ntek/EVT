@@ -53,7 +53,7 @@ for ($i = 0; $i < count($products); ++$i)
     echo '
         </div>
     </div>
-    <div class="col-2"></div>
+    <div class="col-2" id="updateSection"></div>
     ';
 }
 

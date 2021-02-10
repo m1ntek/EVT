@@ -7,20 +7,24 @@ function addProduct(element)
 
     console.log(document.cookie)
 
-    //If it is the first entry, just save and return
+    //If it is the first entry, just save
     if(document.cookie.includes(qtyProductId) == false)
     {
         document.cookie = qtyProductId + "=" + qty
-        return
     }
+    else
+    {
+        cookieQty = parseInt(getCookie(qtyProductId))
 
-    cookieQty = parseInt(getCookie(qtyProductId))
-
-    cookieQty += qty
-    document.cookie = qtyProductId + "=" + cookieQty
+        cookieQty += qty
+        document.cookie = qtyProductId + "=" + cookieQty
+    }
 
     //For debugging
     console.log(document.cookie)
+
+    updateCustomer(qty)
+    removeUpdates()
 }
 
 function removeProduct(element)
@@ -43,3 +47,14 @@ function getCookie(name)
 {
     return document.cookie.split("; ").find(row => row.startsWith(name)).split("=")[1]
 }
+
+function updateCustomer(qty)
+{
+    var newParagraph = document.createElement("p")
+    var newMsg = document.createTextNode("Added " + qty + " more items to cart!")
+    var infoDiv = document.getElementById("updateSection")
+
+    newParagraph.appendChild(newMsg)
+    infoDiv.appendChild(newParagraph)
+}
+  
