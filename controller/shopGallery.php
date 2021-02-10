@@ -1,7 +1,6 @@
 <?php
 
 include_once "../model/shopProducts.php";
-//include_once "../model/cart.php";
 
 //Products displayed in rows of 3
 
