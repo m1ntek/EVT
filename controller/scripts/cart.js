@@ -23,12 +23,23 @@ function addProduct(element)
     console.log(document.cookie)
 }
 
+function removeProduct(element)
+{
+    console.log(document.cookie)
+    console.log(element)
+
+    var qtyProductId = "qtyProduct" + element.id
+
+    //Remove the cookie
+    if(document.cookie.includes(qtyProductId) == true)
+    {
+        document.cookie = qtyProductId + "=0; Max-Age=0"
+    }
+
+    window.location.reload();
+}
+
 function getCookie(name)
 {
     return document.cookie.split("; ").find(row => row.startsWith(name)).split("=")[1]
-}
-
-function removeProduct(element)
-{
-    //To be completed
 }

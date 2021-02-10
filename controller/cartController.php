@@ -14,6 +14,8 @@ if(count($_COOKIE) <= 1) //Empty cookie still contains a session id
 
 ksort($_COOKIE);
 
+//Re-sync with cookie data
+$cartProducts=[];
 foreach($_COOKIE as $product => $qty)
 {
   if($product != "PHPSESSID")
@@ -30,10 +32,10 @@ foreach($cartProducts as $product)
     <div class="col-2"></div>
     <div class="col-sm-8">
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <img src="'.$GLOBALS["productImages"][$product->shopId]["src"].'">
         </div>
-        <div class="col">
+        <div class="col-sm">
           <h5>'. $product->name .'</h5>
           <h6>$'. number_format($product->price, 2, '.', ',') .'</h6>
           <p>Qty: '. $product->quantity .'</p>
@@ -54,7 +56,7 @@ echo '
 <div class="row">
   <div class="col-2"></div>
   <div class="col-8">
-    <h1>Total: $'.$grandTotal.'</h1>
+    <h1>Total: $'.number_format($grandTotal, 2, '.', ',').'</h1>
     <br>
   </div>
   <div class="col-2"></div>
@@ -66,7 +68,7 @@ function storeToCart($product, $qty)
   $stringArray = str_split($product);
   $index = $stringArray[count($stringArray)-1]; //Not the most elegant way to get item index...
   echo '<br>';
-  
+
   array_push($GLOBALS["cartProducts"], new CartProduct($index, $GLOBALS["products"][$index]["name"], $GLOBALS["products"][$index]["price"], $qty));
 }
 
