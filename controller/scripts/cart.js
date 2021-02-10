@@ -5,17 +5,19 @@ function addProduct(element)
     var qtyProductId = "qtyProduct" + element.id
     var qty = parseInt(document.getElementById(qtyProductId).value)
 
+    console.log(document.cookie)
+
     //If it is the first entry, just save and return
     if(document.cookie.includes(qtyProductId) == false)
     {
-        document.cookie = qtyProductId + "=" + qty + "; Max-Age=0"
+        document.cookie = qtyProductId + "=" + qty
         return
     }
 
     cookieQty = parseInt(getCookie(qtyProductId))
 
     cookieQty += qty
-    document.cookie = qtyProductId + "=" + cookieQty + "; Max-Age=0"
+    document.cookie = qtyProductId + "=" + cookieQty
 
     //For debugging
     console.log(document.cookie)
@@ -28,5 +30,5 @@ function getCookie(name)
 
 function removeProduct(element)
 {
-
+    //To be completed
 }

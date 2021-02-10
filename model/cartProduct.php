@@ -9,7 +9,7 @@ class CartProduct
     public $total = 0;
 
     //Constructor for ease of use.
-    public __construct($shopId, $name, $price, $qty)
+    public function __construct($shopId, $name, $price, $qty)
     {
         $this->shopId = $shopId;
         $this->name = $name;

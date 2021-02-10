@@ -1,31 +1,25 @@
 <?php
 
-$cartProducts;
-$grandTotal;
+include_once "../model/cartProduct.php";
+include_once "../model/shopProducts.php";
 
-echo '<br>';
+$cartProducts=[];
+$grandTotal=0;
 
-if(count($_COOKIE) <= 1) //Empty cookie still has a session id
+if(count($_COOKIE) <= 1) //Empty cookie still contains a session id
 {
   echo '<p>There is nothing in the cart.</p>';
   return;
 }
 
-// for($i=0;$i<count($_COOKIE);++$i)
-// {
-//   setcookie("nameProduct".$i, "", time() - 3600);
-//   setcookie("qtyProduct".$i, "", time() - 3600);
-//   setcookie("priceProduct".$i, "", time() - 3600);
-// }
-
 ksort($_COOKIE);
-print_r($_COOKIE);
 
-//Get data from cookies
-var_dump($_COOKIE);
 foreach($_COOKIE as $product => $qty)
 {
-  storeToCart($product, $qty);
+  if($product != "PHPSESSID")
+  {
+    storeToCart($product, $qty);
+  }
 }
 
 //View and totals
@@ -34,16 +28,20 @@ foreach($cartProducts as $product)
   echo '
   <div class="row">
     <div class="col-2"></div>
-    <div class="col-8">
-      <div class="col-4">
-
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-2">
+          <img src="'.$GLOBALS["productImages"][$product->shopId]["src"].'">
+        </div>
+        <div class="col">
+          <h5>'. $product->name .'</h5>
+          <h6>$'. number_format($product->price, 2, '.', ',') .'</h6>
+          <p>Qty: '. $product->quantity .'</p>
+          <h5>Total: $'. number_format($product->total, 2, '.', ',') .'</h5>
+          <button type="button" class="btn btn-danger" id="'.$product->shopId.'" onclick="removeProduct(this)">Remove</button>
+        </div>
       </div>
-      <div class="col-8">
-        <h5>'; $product->name; echo '</h5>
-        <h6>$'; $product->price; echo '</h6>
-        <p>Qty: '; $product->quantity; echo '</p>
-        <button type="button" class="btn btn-danger" id="'.$product->shopId.'" onclick="removeProduct(this)">Remove</button>
-      </div>
+      <br>
     </div>
     <div class="col-2"></div>
   </div>';
@@ -51,11 +49,13 @@ foreach($cartProducts as $product)
   $grandTotal += $product->total;
 }
 
+//Grand total
 echo '
 <div class="row">
   <div class="col-2"></div>
   <div class="col-8">
-    <h6>Total: '.$grandTotal.'</h6>
+    <h1>Total: $'.$grandTotal.'</h1>
+    <br>
   </div>
   <div class="col-2"></div>
 </div>
@@ -63,8 +63,11 @@ echo '
 
 function storeToCart($product, $qty)
 {
-  $index = $product[count($product)-1]; //Not the most elegant way to get item index...
-  array_push($cartProducts, new CartProduct($index, $products[$index]["name"], $products[$index]["price"], parseInt($qty)));
+  $stringArray = str_split($product);
+  $index = $stringArray[count($stringArray)-1]; //Not the most elegant way to get item index...
+  echo '<br>';
+  
+  array_push($GLOBALS["cartProducts"], new CartProduct($index, $GLOBALS["products"][$index]["name"], $GLOBALS["products"][$index]["price"], $qty));
 }
 
 ?>
