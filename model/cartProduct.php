@@ -2,18 +2,18 @@
 
 class CartProduct
 {
-    public $Name;
-    public $Price = 0;
-    public $Quantity = 0;
-    public $Total = 0;
+    public $name;
+    public $price = 0;
+    public $quantity = 0;
+    public $total = 0;
 
     //Constructor for ease of use.
     public __construct($name, $price, $qty)
     {
-        $Name = $name;
-        $Price = $price;
-        $Quantity += $qty;
-        $Total = $price * $qty;
+        $this->name = $name;
+        $this->price = $price;
+        $this->quantity += $qty;
+        $this->total = $price * $qty;
     }
 }
 

@@ -15,7 +15,7 @@
 
     <?php
         include_once "header.php";
-        include_once "../controller/[INSERT CONTROLLER]";
+        include_once "../controller/cartController.php";
     ?>
     
     <!-- Optional JavaScript; choose one of the two! -->
