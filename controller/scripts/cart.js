@@ -1,27 +1,24 @@
+
+
 function addProduct(element)
 {
-    //Get product details
-    var name = document.getElementById("nameProduct" + element.id).firstChild.data
-    var price = document.getElementById("priceProduct" + element.id).firstChild.data
-
-    //Save to cookie
-    document.cookie = "nameProduct" + element.id + "=" + name + "; expires=0"
-    document.cookie = "priceProduct" + element.id + "=" + price + "; expires=0"
-    addQty(element.id)
-
-    //For debugging
-    console.log(document.cookie)
-}
-
-function addQty(elementId)
-{
-    var qtyProductId = "qtyProduct" + elementId
+    var qtyProductId = "qtyProduct" + element.id
     var qty = parseInt(document.getElementById(qtyProductId).value)
+
+    //If it is the first entry, just save and return
+    if(document.cookie.includes(qtyProductId) == false)
+    {
+        document.cookie = qtyProductId + "=" + qty + "; Max-Age=0"
+        return
+    }
 
     cookieQty = parseInt(getCookie(qtyProductId))
 
     cookieQty += qty
-    document.cookie = qtyProductId + "=" + cookieQty + "; expires=0"
+    document.cookie = qtyProductId + "=" + cookieQty + "; Max-Age=0"
+
+    //For debugging
+    console.log(document.cookie)
 }
 
 function getCookie(name)
@@ -31,5 +28,5 @@ function getCookie(name)
 
 function removeProduct(element)
 {
-    
+
 }
