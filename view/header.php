@@ -12,8 +12,8 @@ echo '
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="home.php">Shop</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="cart.php">Cart</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="cart.php">Cart</a>
         </li>
       </ul>
     </div>
