@@ -9,7 +9,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost/ezyvettask/view/home.php",
+            "url": "http://localhost/ezyvettask/view",
             "webRoot": "${workspaceFolder}"
         }
     ]
